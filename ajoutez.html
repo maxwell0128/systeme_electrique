@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+</head>
+<body>
+    <h1>Bienvenue sur mon portfolio</h1>
+    <p>Je suis ampo informatique.</p>
+    <button id="downloadVCard">Enregistrer mes coordonnées</button>
+
+    
+    <script>
+        document.getElementById('downloadVCard').addEventListener('click', function() {
+    const vCardData = 
+    `BEGIN:VCARD
+    VERSION:3.0
+    FN:ampo
+    TEL:03030303
+    EMAIL:max@gmail.com
+    ORG:maxwell
+    TITLE:informatique
+    END:VCARD`;
+
+    // Créer un Blob avec les données de la vCard
+    const blob = new Blob([vCardData], { type: 'text/vcard' });
+
+    // Créer un lien pour le téléchargement
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'contact.vcf';
+
+    // Ajouter le lien à la page, cliquer sur le lien, puis supprimer le lien
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
+
+    </script>
+</body>
+</html>
