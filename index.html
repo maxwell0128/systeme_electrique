@@ -595,7 +595,6 @@
         const makeVCardName = (name) => `FN;CHARSET=UTF-8:${name}`;
         const makeVCardOrg = (org) => `ORG;CHARSET=UTF-8:${org}`;
         const makeVCardTitle = (title) => title ? `TITLE:${title}` : '';
-        const makeVCardPhoto = (img) => img ? `PHOTO;TYPE=JPEG;ENCODING=b:${img}` : '';
         const makeVCardTel = (phone, type) => `TEL;type=${type}:${phone}`;
         const makeVCardAdr = (address) => `ADR;CHARSET=UTF-8:;;${address};;;;`;
         const makeVCardEmail = (email) => `EMAIL;CHARSET=UTF-8;WORK;INTERNET:${email}`;
@@ -603,20 +602,8 @@
         const makeVCardLabel = (label) => `item1.X-ABLabel;CHARSET=UTF-8:${label}`;
         const makeVCardTimeStamp = () => `REV:${new Date().toISOString()}`;
         
-        async function getImageBase64(imagePath) {
-            const response = await fetch(imagePath);
-            const blob = await response.blob();
-            return new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    resolve(reader.result.split(',')[1]);
-                };
-                reader.readAsDataURL(blob);
-            });
-        }
         
         async function makeVCard() {
-            const photoBase64 = await getImageBase64("img/logo.jpg");
         
             const vcard = `BEGIN:VCARD
         ${makeVCardVersion()}
@@ -624,7 +611,6 @@
         ${makeVCardName(nameEl.value)}
         ${makeVCardOrg(orgEl.value)}
         ${makeVCardTitle(titleEl.value)}
-        ${makeVCardPhoto(photoBase64)}
         ${makeVCardTel(telEl1.value, 'CELL;type=pref')}
         ${makeVCardTel(telEl2.value, 'WORK')}
         ${makeVCardAdr(addressEl.value)}
