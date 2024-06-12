@@ -14,7 +14,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         .btn-contact:hover {
             background-color: #0056b3;
         }
@@ -31,23 +31,22 @@
         btnContact.addEventListener('click', () => {
             // Préparez les informations de contact
             const contactInfo = {
-                name: 'Franck Michaël AKOÏ',
-                company: 'System Electrique',
+                name: 'Franck Michaël AKOÏ', // Nom et prénom combinés
+                org: 'System Electrique', // Nom de l'entreprise
                 email: 'systemelectrique225@mail.com',
-                phones: [
+                tel: [ // Tableau de numéros de téléphone
                     '+225 07 68 242 541',
                     '+225 01 72 038 891'
                 ],
-                website: 'www.votresiteweb.com',
-                linkedin: 'https://www.linkedin.com/in/votre-nom/',
-                // Ajoutez d'autres champs si nécessaire
+                url: 'www.votresiteweb.com', // URL du site Web
+                linkedin: 'https://www.linkedin.com/in/votre-nom/' // URL du profil LinkedIn
             };
 
             // Convertissez les informations de contact au format vCard
             const vCardString = generateVCard(contactInfo);
 
             // Déclenchez le téléchargement du fichier vCard
-            triggerDownload(vCardString, 'Franck_Michaël_AKOÏ.vcf');
+            triggerDownload(vCardString, 'Franck_Michaël_AKOÏ.vcf'); // Nom de fichier avec prénom et nom
         });
 
         // Fonction pour générer la chaîne vCard
@@ -58,9 +57,7 @@
             for (const key in contactInfo) {
                 if (contactInfo.hasOwnProperty(key)) {
                     const value = contactInfo[key];
-
-                    // Gérer les champs multiples (tels que les numéros de téléphone)
-                    if (Array.isArray(value)) {
+                    if (Array.isArray(value)) { // Gère les tableaux de valeurs (numéros de téléphone)
                         for (let i = 0; i < value.length; i++) {
                             vCard += `${key}:${value[i]}\n`;
                         }
