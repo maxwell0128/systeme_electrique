@@ -127,29 +127,29 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Nom">
-                                    <label for="name">Votre nom</label>
+                                    <input type="text" class="form-control" id="nom" placeholder="Nom">
+                                    <label for="nom">Votre nom</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="E-mail">
-                                    <label for="email">Votre Email</label>
+                                    <input type="email" class="form-control" id="e_mail" placeholder="E-mail">
+                                    <label for="e_mail">Votre Email</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="hidden" class="form-control" id="subject" placeholder="Sujet" value="Demande de devis">
+                                    <input type="hidden" class="form-control" id="sujet" placeholder="Sujet" value="Demande de devis">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="vous voulez un devis de quoi" id="message" style="height: 200px"></textarea>
-                                    <label for="message">Vous voulez un devis de quoi</label>
+                                    <textarea class="form-control" placeholder="vous voulez un devis de quoi" id="messages" style="height: 200px"></textarea>
+                                    <label for="messages">Vous voulez un devis de quoi</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-warning rounded-pill py-3 px-5" onclick="sendemail()" type="submit">Demaner devis</button>
+                                <button class="btn btn-warning rounded-pill py-3 px-5" onclick="sendemaildevi()" type="submit">Demaner devis</button>
                             </div>
                         </div>
                     </form>
@@ -631,7 +631,29 @@
             }).catch((err) => {
                 alert("email non envoyer")
             });
-        }
+        };
+
+        function sendemaildevi() {
+            (function () {
+                emailjs.init("mfBgmFp_eKG9pnvwS");
+            })();
+            
+            var params = {
+                name: document.getElementById('nom').value,
+                email: document.getElementById('e_mail').value,
+                subject: document.getElementById('sujet').value,
+                message: document.getElementById('messages').value,
+            };
+            var serviceID= "service_l1w7p48";
+            var templateID= "template_l7h9r7l";
+
+            emailjs.send(serviceID, templateID, params)
+            .then( res => {
+                alert("email envoyer")
+            }).catch((err) => {
+                alert("email non envoyer")
+            });
+        };
 
     </script>
         
