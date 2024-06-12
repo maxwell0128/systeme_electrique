@@ -1,83 +1,35 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bouton d'enregistrement des informations de contact</title>
-    <style>
-        .btn-contact {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .btn-contact:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Télécharger Contact vCard</title>
 </head>
 <body>
-    <h1>Enregistrez mes informations de contact</h1>
-    <p>Cliquez sur le bouton ci-dessous pour enregistrer facilement mes informations dans votre répertoire téléphonique.</p>
-    <button class="btn-contact" id="btnContact">Enregistrer</button>
+    <button id="downloadBtn">Télécharger Contact</button>
 
     <script>
-        const btnContact = document.getElementById('btnContact');
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const vCardContent = `
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=UTF-8:AKOÏ;Franck Michaël
+FN;CHARSET=UTF-8:Franck Michaël AKOÏ
+ORG;CHARSET=UTF-8:System Electrique
+ADR;CHARSET=UTF-8:;;ABIDJAN Rue i86;;;;
+TEL;type=CELL;type=pref:+225 07 68 242 541
+TEL;type=WORK:+225 01 72 038 891
+EMAIL;CHARSET=UTF-8;WORK;INTERNET:systemelectrique225@mail.com
+END:VCARD`;
 
-        btnContact.addEventListener('click', () => {
-            // Préparez les informations de contact
-            const contactInfo = {
-                firstname: 'Franck Michaël',
-                lastname: 'AKOÏ',
-                phone_number: '+225 07 68 242 541',
-                tel_number: '+225 01 72 038 891',
-                company: 'System Electrique', // Nom de l'entreprise
-                email: 'systemelectrique225@mail.com',
-                address: '2 plateaux rue des jardins, Carrefour station Total à droite, Av. Boga Doudou, Abidjan',
-                url: 'www.votresiteweb.com', // URL du site Web
-                linkedin: 'https://www.linkedin.com/in/votre-nom/' // URL du profil LinkedIn
-            };
-
-            // Convertissez les informations de contact au format vCard
-            const vCardString = generateVCard(contactInfo);
-        });
-
-        // Fonction pour générer la chaîne vCard
-        function generateVCard(contactInfo) {
-            let vCard = 'BEGIN:VCARD';
-            vCard += 'VERSION:3.0';
-
-            for (const key in contactInfo) {
-                if (contactInfo.hasOwnProperty(key)) {
-                    const value = contactInfo[key];
-                    if (Array.isArray(value)) { // Gère les tableaux de valeurs (numéros de téléphone)
-                        for (let i = 0; i < value.length; i++) {
-                            vCard += `${key}:${value[i]}\n`;
-                        }
-                    } else {
-                        vCard += `${key}:${value}\n`;
-                    }
-                }
-            }
-
-            vCard += 'END:VCARD';
-            return vCard;
-        }
-
-        // Fonction pour déclencher le téléchargement du fichier vCard
-        function triggerDownload(vCardString, filename) {
-            const blob = new Blob([vCardString], { type: 'text/vcard' });
+            const blob = new Blob([vCardContent], { type: 'text/vcard;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = filename;
+            a.download = 'contact.vcf';
             a.click();
             URL.revokeObjectURL(url);
-        }
+        });
     </script>
 </body>
 </html>
