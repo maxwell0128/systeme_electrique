@@ -1,42 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio</title>
+    <title>Bouton d'enregistrement des informations de contact</title>
+    <style>
+        .btn-contact {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-contact:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenue sur mon portfolio</h1>
-    <p>Je suis ampo informatique.</p>
-    <button id="downloadVCard">Enregistrer mes coordonnées</button>
+    <h1>Enregistrez mes informations de contact</h1>
+    <p>Cliquez sur le bouton ci-dessous pour enregistrer facilement mes informations dans votre répertoire téléphonique.</p>
+    <button class="btn-contact" id="btnContact">Enregistrer</button>
 
-    
     <script>
-        document.getElementById('downloadVCard').addEventListener('click', function() {
-    const vCardData = 
-    `BEGIN:VCARD
-    VERSION:3.0
-    FN:ampo
-    TEL:03030303
-    EMAIL:max@gmail.com
-    ORG:maxwell
-    TITLE:informatique
-    END:VCARD`;
+        const btnContact = document.getElementById('btnContact');
 
-    // Créer un Blob avec les données de la vCard
-    const blob = new Blob([vCardData], { type: 'text/vcard' });
+        btnContact.addEventListener('click', () => {
+            // Préparez les informations de contact
+            const contactInfo = {
+                name: 'Votre Nom',
+                email: 'votre@email.com',
+                phone: '+33 123 456 789',
+                website: 'www.votresiteweb.com',
+                linkedin: 'https://www.linkedin.com/in/votre-nom/',
+                // Ajoutez d'autres champs si nécessaire
+            };
 
-    // Créer un lien pour le téléchargement
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'contact.vcf';
+            // Convertissez les informations de contact au format vCard
+            const vCardString = generateVCard(contactInfo);
 
-    // Ajouter le lien à la page, cliquer sur le lien, puis supprimer le lien
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-});
+            // Déclenchez le téléchargement du fichier vCard
+            triggerDownload(vCardString, 'votre_nom.vcf');
+        });
 
+        // Fonction pour générer la chaîne vCard
+        function generateVCard(contactInfo) {
+            let vCard = 'BEGIN:VCARD\n';
+            vCard += 'VERSION:3.0\n';
+
+            for (const key in contactInfo) {
+                if (contactInfo.hasOwnProperty(key)) {
+                    const value = contactInfo[key];
+                    vCard += `${key}:${value}\n`;
+                }
+            }
+
+            vCard += 'END:VCARD\n';
+            return vCard;
+        }
+
+        // Fonction pour déclencher le téléchargement du fichier vCard
+        function triggerDownload(vCardString, filename) {
+            const blob = new Blob([vCardString], { type: 'text/vcard' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
     </script>
 </body>
 </html>
