@@ -6,108 +6,68 @@
     <title>Télécharger Contact vCard</title>
 </head>
 <body>
-
-    <fieldset>
-        <div>
-          <label for="cardInfoEl">cardInfo</label>
-          <input type="text" id="cardInfoEl" value="cart de visite" />
-        </div>
-        <div>
-          <label for="emailEl">email</label>
-          <input type="text" id="emailEl"  value="cart de visite"  />
-        </div>
-        <div>
-          <label for="nameEl">name</label>
-          <input type="text" id="nameEl"  value="cart de visite"  />
-        </div>
-        <div>
-          <label for="orgEl">org</label>
-          <input type="text" id="orgEl"  value="cart de visite"  />
-        </div>
-        <div>
-          <label for="titleEl">title</label>
-          <input type="text" id="titleEl" value="cart de visite"  />
-        </div>
-        <div>
-          <label for="telEl">tel</label>
-          <input type="text" id="telEl"   value="cart de visite" />
-        </div>
-        <div>
-          <label for="addressEl">address</label>
-          <input type="text" id="addressEl"  value="cart de visite" />
-        </div>
-        <div>
-          <label for="fileEl">Clique aqui para carregar imagem</label>
-          <input type="file" id="fileEl" hidden /><br />
-          <img width="100" alt="Prévia da imagem..." id="previewEl" />
-        </div>
-        <button id="downloadEl">Save</button>
-      </fieldset>
-
-
-    <button id="downloadBtn">Télécharger Contact</button>
-
-    <script>
-        document.getElementById('downloadBtn').addEventListener('click', function() {
-            const vCardContent = `BEGIN:VCARD
-            VERSION:3.0
-            N;CHARSET=UTF-8:AKOÏ;Franck Michaël
-            FN;CHARSET=UTF-8:Franck Michaël AKOÏ
-            ORG;CHARSET=UTF-8:System Electrique
-            ADR;CHARSET=UTF-8:;;ABIDJAN Rue i86;;;;
-            TEL;type=CELL;type=pref:+225 07 68 242 541
-            TEL;type=WORK:+225 01 72 038 891
-            EMAIL;CHARSET=UTF-8;WORK;INTERNET:systemelectrique225@mail.com
-            PHOTO;ENCODING=b;TYPE=JPEG:/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMxaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0NSA3OS4xNjM0OTksIDIwMTgvMDgvMTMtMTY6NDA6MjIgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjc2NTBFRTc5QTZDRTExRTk5NzJCRjBFQ0M2MjlENDI5IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjc2NTBFRTdBQTZDRTExRTk5NzJCRjBFQ0M2MjlENDI5Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzY1MEVFNzdBNkNFMTFFOTk3MkJGMEVDQzYyOUQ0MjkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NzY1MEVFNzhBNkNFMTFFOTk3MkJGMEVDQzYyOUQ0MjkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAmQWRvYmUAZMAAAAABAwAVBAMGCg0AABMlAAAYTwAAJcMAADlH/9sAhAAGBA
-            item1.URL:https://systemeelectrique.netlify.app/
-            item1.X-ABLabel;CHARSET=UTF-8:My Website
-            END:VCARD`;
-
-            const blob = new Blob([vCardContent], { type: 'text/vcard;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'contact.vcf';
-            a.click();
-            URL.revokeObjectURL(url);
-        });
-    </script>
+    <input type="text" id="cardInfo" value="AKOÏ;Franck Michaël">
+    <input type="text" id="name" value="Franck Michaël AKOÏ">
+    <input type="text" id="org" value="System Electrique">
+    <input type="text" id="title" value="">
+    <input type="text" id="tel" value="+225 07 68 242 541">
+    <input type="text" id="address" value="ABIDJAN Rue i86">
+    <input type="email" id="email" value="systemelectrique225@mail.com">
+    <input type="file" id="file">
+    <img id="preview" style="display:none;">
+    <button id="download">Télécharger vCard</button>
 
     <script>
         'use strict';
 
-function downloadToFile(content, filename, contentType) {
-  const a = document.createElement('a');
-  const file = new Blob([content], { type: contentType });
+        const cardInfoEl = document.getElementById('cardInfo');
+        const nameEl = document.getElementById('name');
+        const orgEl = document.getElementById('org');
+        const titleEl = document.getElementById('title');
+        const telEl = document.getElementById('tel');
+        const addressEl = document.getElementById('address');
+        const emailEl = document.getElementById('email');
+        const fileEl = document.getElementById('file');
+        const previewEl = document.getElementById('preview');
+        const downloadEl = document.getElementById('download');
 
-  a.href = URL.createObjectURL(file);
-  a.download = filename;
-  a.click();
+        function downloadToFile(content, filename, contentType) {
+            const a = document.createElement('a');
+            const file = new Blob([content], { type: contentType });
 
-  URL.revokeObjectURL(a.href);
-}
+            a.href = URL.createObjectURL(file);
+            a.download = filename;
+            a.click();
 
-function previewFile(event) {
-  let reader = new FileReader();
-  let file = event.target.files[0];
+            URL.revokeObjectURL(a.href);
+        }
 
-  reader.readAsDataURL(file);
-  reader.onloadend = () => (previewEl.src = reader.result);
-}
+        function previewFile(event) {
+            let reader = new FileReader();
+            let file = event.target.files[0];
 
-const makeVCardVersion = () => `VERSION:3.0`;
-const makeVCardInfo = (info) => `N:${info}`;
-const makeVCardName = (name) => `FN:${name}`;
-const makeVCardOrg = (org) => `ORG:${org}`;
-const makeVCardTitle = (title) => `TITLE:${title}`;
-const makeVCardPhoto = (img) => `PHOTO;TYPE=JPEG;ENCODING=b:[${img}]`;
-const makeVCardTel = (phone) => `TEL;TYPE=WORK,VOICE:${phone}`;
-const makeVCardAdr = (address) => `ADR;TYPE=WORK,PREF:;;${address}`;
-const makeVCardEmail = (email) => `EMAIL:${email}`;
-const makeVCardTimeStamp = () => `REV:${new Date().toISOString()}`;
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                previewEl.src = reader.result;
+                previewEl.style.display = 'block';
+            };
+        }
 
-function makeVCard() {
-  let vcard = `BEGIN:VCARD
+        const makeVCardVersion = () => `VERSION:3.0`;
+        const makeVCardInfo = (info) => `N;CHARSET=UTF-8:${info}`;
+        const makeVCardName = (name) => `FN;CHARSET=UTF-8:${name}`;
+        const makeVCardOrg = (org) => `ORG;CHARSET=UTF-8:${org}`;
+        const makeVCardTitle = (title) => title ? `TITLE:${title}` : '';
+        const makeVCardPhoto = (img) => img ? `PHOTO;TYPE=JPEG;ENCODING=b:${img}` : '';
+        const makeVCardTel = (phone) => `TEL;type=CELL;type=pref:${phone}`;
+        const makeVCardAdr = (address) => `ADR;CHARSET=UTF-8:;;${address};;;;`;
+        const makeVCardEmail = (email) => `EMAIL;CHARSET=UTF-8;WORK;INTERNET:${email}`;
+        const makeVCardUrl = (url) => `item1.URL:${url}`;
+        const makeVCardLabel = (label) => `item1.X-ABLabel;CHARSET=UTF-8:${label}`;
+        const makeVCardTimeStamp = () => `REV:${new Date().toISOString()}`;
+
+        function makeVCard() {
+            let vcard = `BEGIN:VCARD
 ${makeVCardVersion()}
 ${makeVCardInfo(cardInfoEl.value)}
 ${makeVCardName(nameEl.value)}
@@ -117,13 +77,15 @@ ${makeVCardPhoto(previewEl.src)}
 ${makeVCardTel(telEl.value)}
 ${makeVCardAdr(addressEl.value)}
 ${makeVCardEmail(emailEl.value)}
+${makeVCardUrl("https://systemeelectrique.netlify.app/")}
+${makeVCardLabel("My Website")}
 ${makeVCardTimeStamp()}
 END:VCARD`;
-  downloadToFile(vcard, 'vcard.vcf', 'text/vcard');
-}
+            downloadToFile(vcard, 'Franck_Michaël_contact.vcf', 'text/vcard');
+        }
 
-downloadEl.addEventListener('click', makeVCard);
-fileEl.addEventListener('change', previewFile);
+        downloadEl.addEventListener('click', makeVCard);
+        fileEl.addEventListener('change', previewFile);
     </script>
 </body>
 </html>
