@@ -31,13 +31,14 @@
         btnContact.addEventListener('click', () => {
             // Préparez les informations de contact
             const contactInfo = {
-                Prénom: 'Franck Michaël',
-                Nom: 'AKOÏ',
-                Entreprise: 'System Electrique',
+                name: 'Franck Michaël AKOÏ',
+                company: 'System Electrique',
                 email: 'systemelectrique225@mail.com',
-                numéro: '+225 07 68 242 541',
-                numéro: '+225 01 72 038 891',
-                URL: 'www.votresiteweb.com',
+                phones: [
+                    '+225 07 68 242 541',
+                    '+225 01 72 038 891'
+                ],
+                website: 'www.votresiteweb.com',
                 linkedin: 'https://www.linkedin.com/in/votre-nom/',
                 // Ajoutez d'autres champs si nécessaire
             };
@@ -46,7 +47,7 @@
             const vCardString = generateVCard(contactInfo);
 
             // Déclenchez le téléchargement du fichier vCard
-            triggerDownload(vCardString, 'votre_nom.vcf');
+            triggerDownload(vCardString, 'Franck_Michaël_AKOÏ.vcf');
         });
 
         // Fonction pour générer la chaîne vCard
@@ -57,7 +58,15 @@
             for (const key in contactInfo) {
                 if (contactInfo.hasOwnProperty(key)) {
                     const value = contactInfo[key];
-                    vCard += `${key}:${value}\n`;
+
+                    // Gérer les champs multiples (tels que les numéros de téléphone)
+                    if (Array.isArray(value)) {
+                        for (let i = 0; i < value.length; i++) {
+                            vCard += `${key}:${value[i]}\n`;
+                        }
+                    } else {
+                        vCard += `${key}:${value}\n`;
+                    }
                 }
             }
 
