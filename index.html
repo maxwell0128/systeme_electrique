@@ -106,11 +106,8 @@
                     </div>
                 </div>
             </nav>
-            <div class="navbar-toggler me-0">
-                <button class="btn btn-warning rounded-pill py-2 px-3 ajouterContactButton" id="downloadBtn">ajouter contact</button>
-            </div>
-            
         </div>
+        <button class="btn btn-warning rounded-pill py-2 px-3 ajouterContactButton" id="downloadBtn2">ajouter contact</button>
     </div>
     <!-- Navbar End -->
 
@@ -569,8 +566,17 @@
 
 
             <script>
-                document.getElementById('downloadBtn').addEventListener('click', function() {
-                    const vCardContent = `
+                function downloadVCard(vCardContent, filename) {
+                    const blob = new Blob([vCardContent], { type: 'text/vcard;charset=utf-8;' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+        
+                const vCardContent = `
                     BEGIN:VCARD
                     VERSION:3.0
                     N;CHARSET=UTF-8:AKOÏ;Franck Michaël
@@ -584,13 +590,12 @@
                     item1.X-ABLabel;CHARSET=UTF-8:My Website
                     END:VCARD`;
         
-                    const blob = new Blob([vCardContent], { type: 'text/vcard;charset=utf-8;' });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'Franck_Michaël_contact.vcf';
-                    a.click();
-                    URL.revokeObjectURL(url);
+                document.getElementById('downloadBtn').addEventListener('click', function() {
+                    downloadVCard(vCardContent, 'Franck_Michaël_contact1.vcf');
+                });
+        
+                document.getElementById('downloadBtn2').addEventListener('click', function() {
+                    downloadVCard(vCardContent, 'Franck_Michaël_contact2.vcf');
                 });
             </script>
     <!-- JavaScript Libraries -->
