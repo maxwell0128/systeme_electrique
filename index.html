@@ -564,64 +564,56 @@
     <a href="#" class="btn btn-lg btn-warning btn-lg-square rounded-circle back-to-top"><i
     class="bi bi-arrow-up"></i></a>
 
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad aspernatur voluptas consequuntur voluptatem ullam quos iure nobis fugiat culpa eum. Hic rerum nisi ratione recusandae asperiores aperiam, ut cupiditate perferendis.</p>
+    <input type="text" id="cardInfoEl" value="AKOÏ;Franck Michaël">
+    <input type="text" id="nameEl" value="Franck Michaël AKOÏ">
+    <input type="text" id="orgEl" value="System Electrique">
+    <input type="text" id="telEl" value="+225 07 68 242 541">
+    <input type="text" id="telEl" value="+225 07 68 242 541">
+    <input type="text" id="addressEl" value="2 plateaux rue des jardins, Carrefour station Total à droite, Av. Boga Doudou, Abidjan">
+    <input type="text" id="emailEl" value="systemelectrique225@mail.com">
     <script>
         'use strict';
 
-        const cardInfoEl = { value: 'AKOÏ;Franck Michaël' }; // Remplacer par la méthode d'obtention de la valeur réelle si nécessaire
-        const nameEl = { value: 'Franck Michaël AKOÏ' };
-        const orgEl = { value: 'System Electrique' };
-        const titleEl = { value: '' };
-        const telEl1 = { value: '+225 07 68 242 541' };
-        const telEl2 = { value: '+225 01 72 038 891' };
-        const addressEl = { value: 'ABIDJAN Rue i86' };
-        const emailEl = { value: 'systemelectrique225@mail.com' };
         const downloadEl = document.getElementById('download');
-        const downloadEl2 = document.getElementById('download2');
+        const downloadE2 = document.getElementById('download2');
 
         function downloadToFile(content, filename, contentType) {
-            const a = document.createElement('a');
-            const file = new Blob([content], { type: contentType });
+        const a = document.createElement('a');
+        const file = new Blob([content], { type: contentType });
 
-            a.href = URL.createObjectURL(file);
-            a.download = filename;
-            a.click();
+        a.href = URL.createObjectURL(file);
+        a.download = filename;
+        a.click();
 
-            URL.revokeObjectURL(a.href);
+        URL.revokeObjectURL(a.href);
         }
+
         const makeVCardVersion = () => `VERSION:3.0`;
-        const makeVCardInfo = (info) => `N;CHARSET=UTF-8:${info}`;
-        const makeVCardName = (name) => `FN;CHARSET=UTF-8:${name}`;
-        const makeVCardOrg = (org) => `ORG;CHARSET=UTF-8:${org}`;
-        const makeVCardTitle = (title) => title ? `TITLE:${title}` : '';
-        const makeVCardTel = (phone, type) => `TEL;type=${type}:${phone}`;
-        const makeVCardAdr = (address) => `ADR;CHARSET=UTF-8:;;${address};;;;`;
-        const makeVCardEmail = (email) => `EMAIL;CHARSET=UTF-8;WORK;INTERNET:${email}`;
-        const makeVCardUrl = (url) => `item1.URL:${url}`;
-        const makeVCardLabel = (label) => `item1.X-ABLabel;CHARSET=UTF-8:${label}`;
+        const makeVCardInfo = (info) => `N:${info}`;
+        const makeVCardName = (name) => `FN:${name}`;
+        const makeVCardOrg = (org) => `ORG:${org}`;
+        const makeVCardPhoto = (img) => `PHOTO;TYPE=JPEG;ENCODING=b:[${img}]`;
+        const makeVCardTel = (phone) => `TEL;TYPE=WORK,VOICE:${phone}`;
+        const makeVCardAdr = (address) => `ADR;TYPE=WORK,PREF:;;${address}`;
+        const makeVCardEmail = (email) => `EMAIL:${email}`;
         const makeVCardTimeStamp = () => `REV:${new Date().toISOString()}`;
 
         function makeVCard() {
-            let vcard = `BEGIN:VCARD
-            ${makeVCardVersion()}
-            ${makeVCardInfo(cardInfoEl.value)}
-            ${makeVCardName(nameEl.value)}
-            ${makeVCardOrg(orgEl.value)}
-            ${makeVCardTitle(titleEl.value)}
-            ${makeVCardTel(telEl1.value, 'CELL;type=pref')}
-            ${makeVCardTel(telEl2.value, 'WORK')}
-            ${makeVCardAdr(addressEl.value)}
-            ${makeVCardEmail(emailEl.value)}
-            ${makeVCardUrl("https://systemeelectrique.netlify.app/")}
-            ${makeVCardLabel("Systeme Electrique")}
-            ${makeVCardTimeStamp()}
-            END:VCARD`;
-
-            downloadToFile(vcard, 'Franck_Michaël_contact.vcf', 'text/vcard');
+        let vcard = `BEGIN:VCARD
+        ${makeVCardVersion()}
+        ${makeVCardInfo(cardInfoEl.value)}
+        ${makeVCardName(nameEl.value)}
+        ${makeVCardOrg(orgEl.value)}
+        ${makeVCardTel(telEl.value)}
+        ${makeVCardAdr(addressEl.value)}
+        ${makeVCardEmail(emailEl.value)}
+        ${makeVCardTimeStamp()}
+        END:VCARD`;
+        downloadToFile(vcard, 'vcard.vcf', 'text/vcard');
         }
 
         downloadEl.addEventListener('click', makeVCard);
-        downloadEl2.addEventListener('click', makeVCard);
+        downloadE2.addEventListener('click', makeVCard);
     </script>
         
     <!-- JavaScript Libraries -->
