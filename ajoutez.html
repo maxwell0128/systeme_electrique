@@ -24,6 +24,8 @@
     <h1>Enregistrez mes informations de contact</h1>
     <p>Cliquez sur le bouton ci-dessous pour enregistrer facilement mes informations dans votre répertoire téléphonique.</p>
     <button class="btn-contact" id="btnContact">Enregistrer</button>
+    
+<a href="/user/services/openapi?cmd=downloadVcf&id=s90app5ijm10" class="btn-contact">add
 
     <script>
         const btnContact = document.getElementById('btnContact');
@@ -41,7 +43,6 @@
                 url: 'www.votresiteweb.com', // URL du site Web
                 linkedin: 'https://www.linkedin.com/in/votre-nom/' // URL du profil LinkedIn
             };
-
             // Convertissez les informations de contact au format vCard
             const vCardString = generateVCard(contactInfo);
 
