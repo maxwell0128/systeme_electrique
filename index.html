@@ -27,6 +27,7 @@
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -101,7 +102,8 @@
                         <a href="#contact" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="ms-auto d-none d-lg-block">
-                        <a href="#contact" class="btn btn-primary rounded-pill py-2 px-3">demander devis</a>
+                        <button type="button" class="btn btn-primary rounded-pill py-2 px-3" data-bs-toggle="modal"
+                        data-bs-target="#devis">demander devis</button>
                         <a class="btn btn-warning rounded-pill py-2 px-3" href="https://linko.page/seynquo7frz3">ajouter contact</a>
                     </div>
                 </div>
@@ -110,7 +112,51 @@
         <a class="btn btn-warning rounded-pill py-2 px-3" id="ajouterContactButton" href="https://linko.page/seynquo7frz3">ajouter contact</a>
     </div>
     <!-- Navbar End -->
-
+    
+    <!-- Video Modal Start -->
+    <div class="modal modal-video fade" id="devis" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Demander devis</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="p-5">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" placeholder="Nom">
+                                    <label for="name">Votre nom</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" placeholder="E-mail">
+                                    <label for="email">Votre Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="hidden" class="form-control" id="subject" placeholder="Sujet" value="Demande de devis">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="vous voulez un devis de quoi" id="message" style="height: 200px"></textarea>
+                                    <label for="message">Vous voulez un devis de quoi</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-warning rounded-pill py-3 px-5" onclick="sendemail()" type="submit">Demaner devis</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Carousel Start -->
     <div class="container-fluid px-0 mb-5">
@@ -460,7 +506,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-warning rounded-pill py-3 px-5" type="submit">Envoyer Message</button>
+                                <button class="btn btn-warning rounded-pill py-3 px-5" onclick="sendemail()" type="submit">Envoyer Message</button>
                             </div>
                         </div>
                     </form>
@@ -563,6 +609,31 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-warning btn-lg-square rounded-circle back-to-top"><i
     class="bi bi-arrow-up"></i></a>
+
+    <script>
+        function sendemail() {
+            (function () {
+                emailjs.init("mfBgmFp_eKG9pnvwS");
+            })();
+            
+            var params = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+            };
+            var serviceID= "service_l1w7p48";
+            var templateID= "template_l7h9r7l";
+
+            emailjs.send(serviceID, templateID, params)
+            .then( res => {
+                alert("email envoyer")
+            }).catch((err) => {
+                alert("email non envoyer")
+            });
+        }
+
+    </script>
         
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
