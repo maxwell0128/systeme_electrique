@@ -1,95 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Télécharger Contact vCard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sélectionner une image par défaut</title>
+<style>
+    .custom-file-input {
+        position: relative;
+        overflow: hidden;
+        margin-top: -20px;
+        margin-left: 10px;
+    }
+    .custom-file-input input[type="file"] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    .custom-file-input img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
 </head>
 <body>
-    salit
-    <input type="hidden" id="cardInfo" value="AKOÏ;Franck Michaël">
-    <input type="hidden" id="name" value="Franck Michaël AKOÏ">
-    <input type="hidden" id="org" value="System Electrique">
-    <input type="hidden" id="title" value="">
-    <input type="hidden" id="tel1" value="+225 07 68 242 541">
-    <input type="hidden" id="tel2" value="+225 01 72 038 891">
-    <input type="hidden" id="address" value="ABIDJAN Rue i86">
-    <input type="hidden" id="email" value="systemelectrique225@mail.com">
-    <input type="hidden" id="file">
-    <img id="preview" style="display:none;">
-    <button id="download">Télécharger vCard</button>
 
-    <script>
-        'use strict';
+<!-- Image par défaut -->
+<img src="img/logo.JPG" alt="Image par défaut" width="100">
 
-        const cardInfoEl = document.getElementById('cardInfo');
-        const nameEl = document.getElementById('name');
-        const orgEl = document.getElementById('org');
-        const titleEl = document.getElementById('title');
-        const telEl1 = document.getElementById('tel1');
-        const telEl2 = document.getElementById('tel2');
-        const addressEl = document.getElementById('address');
-        const emailEl = document.getElementById('email');
-        const fileEl = document.getElementById('file');
-        const previewEl = document.getElementById('preview');
-        const downloadEl = document.getElementById('download');
+<!-- Input pour sélectionner une image -->
+<label for="file-upload" class="custom-file-input" style="display: none;">
+    <input id="file-upload" type="file" accept="image/*">
+    Sélectionner une image
+</label>
 
-        function downloadToFile(content, filename, contentType) {
-            const a = document.createElement('a');
-            const file = new Blob([content], { type: contentType });
-
-            a.href = URL.createObjectURL(file);
-            a.download = filename;
-            a.click();
-
-            URL.revokeObjectURL(a.href);
-        }
-
-        function previewFile(event) {
-            let reader = new FileReader();
-            let file = event.target.files[0];
-
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                previewEl.src = reader.result;
-                previewEl.style.display = 'block';
-            };
-        }
-
-        const makeVCardVersion = () => `VERSION:3.0`;
-        const makeVCardInfo = (info) => `N;CHARSET=UTF-8:${info}`;
-        const makeVCardName = (name) => `FN;CHARSET=UTF-8:${name}`;
-        const makeVCardOrg = (org) => `ORG;CHARSET=UTF-8:${org}`;
-        const makeVCardTitle = (title) => title ? `TITLE:${title}` : '';
-        const makeVCardPhoto = (img) => img ? `PHOTO;TYPE=JPEG;ENCODING=b:${img}` : '';
-        const makeVCardTel = (phone, type) => `TEL;type=${type}:${phone}`;
-        const makeVCardAdr = (address) => `ADR;CHARSET=UTF-8:;;${address};;;;`;
-        const makeVCardEmail = (email) => `EMAIL;CHARSET=UTF-8;WORK;INTERNET:${email}`;
-        const makeVCardUrl = (url) => `item1.URL:${url}`;
-        const makeVCardLabel = (label) => `item1.X-ABLabel;CHARSET=UTF-8:${label}`;
-        const makeVCardTimeStamp = () => `REV:${new Date().toISOString()}`;
-
-        function makeVCard() {
-            let vcard = `BEGIN:VCARD
-${makeVCardVersion()}
-${makeVCardInfo(cardInfoEl.value)}
-${makeVCardName(nameEl.value)}
-${makeVCardOrg(orgEl.value)}
-${makeVCardTitle(titleEl.value)}
-${makeVCardPhoto(previewEl.src)}
-${makeVCardTel(telEl1.value, 'CELL;type=pref')}
-${makeVCardTel(telEl2.value, 'WORK')}
-${makeVCardAdr(addressEl.value)}
-${makeVCardEmail(emailEl.value)}
-${makeVCardUrl("https://systemeelectrique.netlify.app/")}
-${makeVCardLabel("My Website")}
-${makeVCardTimeStamp()}
-END:VCARD`;
-            downloadToFile(vcard, 'Franck_Michaël_contact.vcf', 'text/vcard');
-        }
-
-        downloadEl.addEventListener('click', makeVCard);
-        fileEl.addEventListener('change', previewFile);
-    </script>
 </body>
 </html>

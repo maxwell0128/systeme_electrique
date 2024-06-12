@@ -565,9 +565,15 @@
     <a href="#" class="btn btn-lg btn-warning btn-lg-square rounded-circle back-to-top"><i
     class="bi bi-arrow-up"></i></a>
 
-    <input type="hidden" id="file">
-<input type="file" id="fileInput" accept="image/*" style="display: none;">
-<img id="preview" src="img/logo.JPG" style="max-width: 200px; display: block;">
+    
+<!-- Image par défaut -->
+<img id="preview" src="img/logo.JPG" alt="Image par défaut" width="100">
+
+<!-- Input pour sélectionner une image -->
+<label for="file-upload" class="custom-file-input" style="display: none;">
+    <input id="fileInput" type="file" accept="image/*">
+    Sélectionner une image
+</label>
 
 <button id="download">Télécharger vCard</button>
 <button id="download2">Télécharger vCard 2</button>
@@ -583,8 +589,8 @@
     const telEl2 = { value: '+225 01 72 038 891' };
     const addressEl = { value: 'ABIDJAN Rue i86' };
     const emailEl = { value: 'systemelectrique225@mail.com' };
-    const fileEl = { value: 'img/logo.JPG' };
-    const previewEl = { value: 'img/logo.JPG' };
+    const fileEl = document.getElementById('fileInput');
+    const previewEl = document.getElementById('preview');
     const downloadEl = document.getElementById('download');
     const downloadEl2 = document.getElementById('download2');
 
