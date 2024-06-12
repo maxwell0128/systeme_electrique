@@ -13,7 +13,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            text-decoration: none;
         }
 
         .btn-contact:hover {
@@ -32,12 +31,15 @@
         btnContact.addEventListener('click', () => {
             // Préparez les informations de contact
             const contactInfo = {
-                Name: "Franck Michaël AKOÏ",
-                Organization: "Systeme Electrique",
-                Work_Phone: "+225 01 72 038 891",
-                Cell_Phone: "+225 07 68 242 541",
-                Work_Email: "systemelectrique225@mail.com",
-                Address: "Abidjan Rue i86, Ivory Coast (Côte d'Ivoire)",
+                firstname: 'Franck Michaël',
+                lastname: 'AKOÏ',
+                phone_number: '+225 07 68 242 541',
+                tel_number: '+225 01 72 038 891',
+                company: 'System Electrique', // Nom de l'entreprise
+                email: 'systemelectrique225@mail.com',
+                address: '2 plateaux rue des jardins, Carrefour station Total à droite, Av. Boga Doudou, Abidjan',
+                url: 'www.votresiteweb.com', // URL du site Web
+                linkedin: 'https://www.linkedin.com/in/votre-nom/' // URL du profil LinkedIn
             };
 
             // Convertissez les informations de contact au format vCard
@@ -76,10 +78,12 @@
             const a = document.createElement('a');
             a.href = url;
             a.download = filename;
-            a.rel = 'noopener'; // Ajout de l'attribut rel pour améliorer l'accessibilité
             a.click();
             URL.revokeObjectURL(url);
         }
     </script>
 </body>
 </html>
+
+
+<iframe src="https://linko.page/s90app5ijm10" style="height:667px;width:375px;border:none;"></iframe>
