@@ -11,18 +11,18 @@
     <script>
         document.getElementById('downloadBtn').addEventListener('click', function() {
             const vCardContent = `
-BEGIN:VCARD
-VERSION:3.0
-N;CHARSET=UTF-8:AKOÏ;Franck Michaël
-FN;CHARSET=UTF-8:Franck Michaël AKOÏ
-ORG;CHARSET=UTF-8:System Electrique
-ADR;CHARSET=UTF-8:;;ABIDJAN Rue i86;;;;
-TEL;type=CELL;type=pref:+225 07 68 242 541
-TEL;type=WORK:+225 01 72 038 891
-EMAIL;CHARSET=UTF-8;WORK;INTERNET:systemelectrique225@mail.com
-item1.URL:https://systemeelectrique.netlify.app/
-item1.X-ABLabel;CHARSET=UTF-8:My Website
-END:VCARD`;
+            BEGIN:VCARD
+            VERSION:3.0
+            N;CHARSET=UTF-8:AKOÏ;Franck Michaël
+            FN;CHARSET=UTF-8:Franck Michaël AKOÏ
+            ORG;CHARSET=UTF-8:System Electrique
+            ADR;CHARSET=UTF-8:;;2 plateaux rue des jardins, Carrefour station Total à droite, Av. Boga Doudou, Abidjan;;;;
+            TEL;type=CELL;type=pref:+225 07 68 242 541
+            TEL;type=WORK:+225 01 72 038 891
+            EMAIL;CHARSET=UTF-8;WORK;INTERNET:systemelectrique225@mail.com
+            item1.URL:https://systemeelectrique.netlify.app/
+            item1.X-ABLabel;CHARSET=UTF-8:My Website
+            END:VCARD`;
 
             const blob = new Blob([vCardContent], { type: 'text/vcard;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
