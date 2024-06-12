@@ -566,17 +566,8 @@
     class="bi bi-arrow-up"></i></a>
 
     
-<!-- Image par défaut -->
-<img id="preview" src="img/logo.JPG" alt="Image par défaut" width="100">
-
-<!-- Input pour sélectionner une image -->
-<label for="file-upload" class="custom-file-input" style="display: none;">
-    <input id="fileInput" type="file" accept="image/*">
-    Sélectionner une image
-</label>
-
-<button id="download">Télécharger vCard</button>
-<button id="download2">Télécharger vCard 2</button>
+    <input type="hidden" id="preview" value="img/logo.JPG">
+    <input type="hidden" id="fileInput" value="img/logo.JPG">
 
 <script>
     'use strict';
@@ -590,7 +581,7 @@
     const addressEl = { value: 'ABIDJAN Rue i86' };
     const emailEl = { value: 'systemelectrique225@mail.com' };
     const fileEl = document.getElementById('fileInput');
-    const previewEl = { value: 'img/logo.JPG' };
+    const previewEl = document.getElementById('preview');
     const downloadEl = document.getElementById('download');
     const downloadEl2 = document.getElementById('download2');
 
