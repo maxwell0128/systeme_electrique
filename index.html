@@ -565,60 +565,66 @@
     <a href="#" class="btn btn-lg btn-warning btn-lg-square rounded-circle back-to-top"><i
     class="bi bi-arrow-up"></i></a>
 
+    <input type="hidden" id="file">
+<input type="file" id="fileInput" accept="image/*" style="display: none;">
+<img id="preview" src="img/logo.JPG" style="max-width: 200px; display: block;">
 
-    <script>
-        'use strict';
+<button id="download">Télécharger vCard</button>
+<button id="download2">Télécharger vCard 2</button>
 
-        const cardInfoEl = { value: 'AKOÏ;Franck Michaël' }; // Remplacer par la méthode d'obtention de la valeur réelle si nécessaire
-        const nameEl = { value: 'Franck Michaël AKOÏ' };
-        const orgEl = { value: 'System Electrique' };
-        const titleEl = { value: '' };
-        const telEl1 = { value: '+225 07 68 242 541' };
-        const telEl2 = { value: '+225 01 72 038 891' };
-        const addressEl = { value: 'ABIDJAN Rue i86' };
-        const emailEl = { value: 'systemelectrique225@mail.com' };
-        const fileEl = document.getElementById('fileInput');
-        const previewEl = document.getElementById('preview');
-        const downloadEl = document.getElementById('download');
-        const downloadEl2 = document.getElementById('download2');
+<script>
+    'use strict';
 
-        function downloadToFile(content, filename, contentType) {
-            const a = document.createElement('a');
-            const file = new Blob([content], { type: contentType });
+    const cardInfoEl = { value: 'AKOÏ;Franck Michaël' }; 
+    const nameEl = { value: 'Franck Michaël AKOÏ' };
+    const orgEl = { value: 'System Electrique' };
+    const titleEl = { value: '' };
+    const telEl1 = { value: '+225 07 68 242 541' };
+    const telEl2 = { value: '+225 01 72 038 891' };
+    const addressEl = { value: 'ABIDJAN Rue i86' };
+    const emailEl = { value: 'systemelectrique225@mail.com' };
+    const fileEl = { value: 'img/logo.JPG' };
+    const previewEl = { value: 'img/logo.JPG' };;
+    const downloadEl = document.getElementById('download');
+    const downloadEl2 = document.getElementById('download2');
 
-            a.href = URL.createObjectURL(file);
-            a.download = filename;
-            a.click();
+    function downloadToFile(content, filename, contentType) {
+        const a = document.createElement('a');
+        const file = new Blob([content], { type: contentType });
 
-            URL.revokeObjectURL(a.href);
-        }
+        a.href = URL.createObjectURL(file);
+        a.download = filename;
+        a.click();
 
-        function previewFile(event) {
-            let reader = new FileReader();
-            let file = event.target.files[0];
+        URL.revokeObjectURL(a.href);
+    }
 
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                previewEl.src = reader.result;
-                previewEl.style.display = 'block';
-            };
-        }
+    function previewFile(event) {
+        let reader = new FileReader();
+        let file = event.target.files[0];
 
-        const makeVCardVersion = () => `VERSION:3.0`;
-        const makeVCardInfo = (info) => `N;CHARSET=UTF-8:${info}`;
-        const makeVCardName = (name) => `FN;CHARSET=UTF-8:${name}`;
-        const makeVCardOrg = (org) => `ORG;CHARSET=UTF-8:${org}`;
-        const makeVCardTitle = (title) => title ? `TITLE:${title}` : '';
-        const makeVCardPhoto = (img) => img ? `PHOTO;TYPE=JPEG;ENCODING=b:${img.split(',')[1]}` : '';
-        const makeVCardTel = (phone, type) => `TEL;type=${type}:${phone}`;
-        const makeVCardAdr = (address) => `ADR;CHARSET=UTF-8:;;${address};;;;`;
-        const makeVCardEmail = (email) => `EMAIL;CHARSET=UTF-8;WORK;INTERNET:${email}`;
-        const makeVCardUrl = (url) => `item1.URL:${url}`;
-        const makeVCardLabel = (label) => `item1.X-ABLabel;CHARSET=UTF-8:${label}`;
-        const makeVCardTimeStamp = () => `REV:${new Date().toISOString()}`;
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            previewEl.src = reader.result;
+            previewEl.style.display = 'block';
+        };
+    }
 
-        function makeVCard() {
-            let vcard = `BEGIN:VCARD
+    const makeVCardVersion = () => `VERSION:3.0`;
+    const makeVCardInfo = (info) => `N;CHARSET=UTF-8:${info}`;
+    const makeVCardName = (name) => `FN;CHARSET=UTF-8:${name}`;
+    const makeVCardOrg = (org) => `ORG;CHARSET=UTF-8:${org}`;
+    const makeVCardTitle = (title) => title ? `TITLE:${title}` : '';
+    const makeVCardPhoto = (img) => img ? `PHOTO;TYPE=JPEG;ENCODING=b:${img.split(',')[1]}` : '';
+    const makeVCardTel = (phone, type) => `TEL;type=${type}:${phone}`;
+    const makeVCardAdr = (address) => `ADR;CHARSET=UTF-8:;;${address};;;;`;
+    const makeVCardEmail = (email) => `EMAIL;CHARSET=UTF-8;WORK;INTERNET:${email}`;
+    const makeVCardUrl = (url) => `item1.URL:${url}`;
+    const makeVCardLabel = (label) => `item1.X-ABLabel;CHARSET=UTF-8:${label}`;
+    const makeVCardTimeStamp = () => `REV:${new Date().toISOString()}`;
+
+    function makeVCard() {
+        let vcard = `BEGIN:VCARD
 ${makeVCardVersion()}
 ${makeVCardInfo(cardInfoEl.value)}
 ${makeVCardName(nameEl.value)}
@@ -634,13 +640,13 @@ ${makeVCardLabel("My Website")}
 ${makeVCardTimeStamp()}
 END:VCARD`;
 
-            downloadToFile(vcard, 'Franck_Michaël_contact.vcf', 'text/vcard');
-        }
+        downloadToFile(vcard, 'Franck_Michaël_contact.vcf', 'text/vcard');
+    }
 
-        downloadEl.addEventListener('click', makeVCard);
-        downloadEl2.addEventListener('click', makeVCard);
-        fileEl.addEventListener('change', previewFile);
-    </script>
+    downloadEl.addEventListener('click', makeVCard);
+    downloadEl2.addEventListener('click', makeVCard);
+    fileEl.addEventListener('change', previewFile);
+</script>
 
         
     <!-- JavaScript Libraries -->
