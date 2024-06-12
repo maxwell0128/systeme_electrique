@@ -11,7 +11,7 @@
     <input type="text" id="org" value="System Electrique">
     <input type="text" id="title" value="">
     <input type="text" id="tel1" value="+225 07 68 242 541">
-    <input type="text" id="tel2" value="+225 07 68 242 541">
+    <input type="text" id="tel2" value="+225 01 72 038 891">
     <input type="text" id="address" value="ABIDJAN Rue i86">
     <input type="email" id="email" value="systemelectrique225@mail.com">
     <input type="file" id="file">
@@ -25,8 +25,8 @@
         const nameEl = document.getElementById('name');
         const orgEl = document.getElementById('org');
         const titleEl = document.getElementById('title');
-        const telEl = document.getElementById('tel1');
-        const telE2 = document.getElementById('tel2');
+        const telEl1 = document.getElementById('tel1');
+        const telEl2 = document.getElementById('tel2');
         const addressEl = document.getElementById('address');
         const emailEl = document.getElementById('email');
         const fileEl = document.getElementById('file');
@@ -61,8 +61,7 @@
         const makeVCardOrg = (org) => `ORG;CHARSET=UTF-8:${org}`;
         const makeVCardTitle = (title) => title ? `TITLE:${title}` : '';
         const makeVCardPhoto = (img) => img ? `PHOTO;TYPE=JPEG;ENCODING=b:${img}` : '';
-        const makeVCardTel1 = (phone) => `TEL;type=CELL;type=pref:${phone}`;
-        const makeVCardTel2 = (phone) => `TEL;type=WORK:${phone}`;
+        const makeVCardTel = (phone, type) => `TEL;type=${type}:${phone}`;
         const makeVCardAdr = (address) => `ADR;CHARSET=UTF-8:;;${address};;;;`;
         const makeVCardEmail = (email) => `EMAIL;CHARSET=UTF-8;WORK;INTERNET:${email}`;
         const makeVCardUrl = (url) => `item1.URL:${url}`;
@@ -77,8 +76,8 @@ ${makeVCardName(nameEl.value)}
 ${makeVCardOrg(orgEl.value)}
 ${makeVCardTitle(titleEl.value)}
 ${makeVCardPhoto(previewEl.src)}
-${makeVCardTel(telEl.value)}
-${makeVCardTel2(telE2.value)}
+${makeVCardTel(telEl1.value, 'CELL;type=pref')}
+${makeVCardTel(telEl2.value, 'WORK')}
 ${makeVCardAdr(addressEl.value)}
 ${makeVCardEmail(emailEl.value)}
 ${makeVCardUrl("https://systemeelectrique.netlify.app/")}
