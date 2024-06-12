@@ -564,11 +564,11 @@
     <a href="#" class="btn btn-lg btn-warning btn-lg-square rounded-circle back-to-top"><i
     class="bi bi-arrow-up"></i></a>
 
-
+    
     <script>
         'use strict';
-        
-        const cardInfoEl = { value: 'AKOÏ;Franck Michaël' }; 
+
+        const cardInfoEl = { value: 'AKOÏ;Franck Michaël' }; // Remplacer par la méthode d'obtention de la valeur réelle si nécessaire
         const nameEl = { value: 'Franck Michaël AKOÏ' };
         const orgEl = { value: 'System Electrique' };
         const titleEl = { value: '' };
@@ -578,18 +578,17 @@
         const emailEl = { value: 'systemelectrique225@mail.com' };
         const downloadEl = document.getElementById('download');
         const downloadEl2 = document.getElementById('download2');
-        
+
         function downloadToFile(content, filename, contentType) {
             const a = document.createElement('a');
             const file = new Blob([content], { type: contentType });
-        
+
             a.href = URL.createObjectURL(file);
             a.download = filename;
             a.click();
-        
+
             URL.revokeObjectURL(a.href);
         }
-        
         const makeVCardVersion = () => `VERSION:3.0`;
         const makeVCardInfo = (info) => `N;CHARSET=UTF-8:${info}`;
         const makeVCardName = (name) => `FN;CHARSET=UTF-8:${name}`;
@@ -601,35 +600,29 @@
         const makeVCardUrl = (url) => `item1.URL:${url}`;
         const makeVCardLabel = (label) => `item1.X-ABLabel;CHARSET=UTF-8:${label}`;
         const makeVCardTimeStamp = () => `REV:${new Date().toISOString()}`;
-        
-        
-        async function makeVCard() {
-        
-        const vcard = `BEGIN:VCARD
-        ${makeVCardVersion()}
-        ${makeVCardInfo(cardInfoEl.value)}
-        ${makeVCardName(nameEl.value)}
-        ${makeVCardOrg(orgEl.value)}
-        ${makeVCardTitle(titleEl.value)}
-        ${makeVCardTel(telEl1.value, 'CELL;type=pref')}
-        ${makeVCardTel(telEl2.value, 'WORK')}
-        ${makeVCardAdr(addressEl.value)}
-        ${makeVCardEmail(emailEl.value)}
-        ${makeVCardUrl("https://systemeelectrique.netlify.app/")}
-        ${makeVCardLabel("Systeme Electrique")}
-        ${makeVCardTimeStamp()}
-        END:VCARD`;
-        
+
+        function makeVCard() {
+            let vcard = `BEGIN:VCARD
+            ${makeVCardVersion()}
+            ${makeVCardInfo(cardInfoEl.value)}
+            ${makeVCardName(nameEl.value)}
+            ${makeVCardOrg(orgEl.value)}
+            ${makeVCardTitle(titleEl.value)}
+            ${makeVCardTel(telEl1.value, 'CELL;type=pref')}
+            ${makeVCardTel(telEl2.value, 'WORK')}
+            ${makeVCardAdr(addressEl.value)}
+            ${makeVCardEmail(emailEl.value)}
+            ${makeVCardUrl("https://systemeelectrique.netlify.app/")}
+            ${makeVCardLabel("Systeme Electrique")}
+            ${makeVCardTimeStamp()}
+            END:VCARD`;
+
             downloadToFile(vcard, 'Franck_Michaël_contact.vcf', 'text/vcard');
         }
-        
+
         downloadEl.addEventListener('click', makeVCard);
         downloadEl2.addEventListener('click', makeVCard);
-        </script>
-        
-        </body>
-        </html>
-
+    </script>
         
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
