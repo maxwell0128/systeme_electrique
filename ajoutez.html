@@ -44,15 +44,12 @@
 
             // Convertissez les informations de contact au format vCard
             const vCardString = generateVCard(contactInfo);
-
-            // Déclenchez le téléchargement du fichier vCard
-            triggerDownload(vCardString, 'Franck_Michaël_AKOÏ.vcf'); // Nom de fichier avec prénom et nom
         });
 
         // Fonction pour générer la chaîne vCard
         function generateVCard(contactInfo) {
-            let vCard = 'BEGIN:VCARD\n';
-            vCard += 'VERSION:3.0\n';
+            let vCard = 'BEGIN:VCARD';
+            vCard += 'VERSION:3.0';
 
             for (const key in contactInfo) {
                 if (contactInfo.hasOwnProperty(key)) {
@@ -67,7 +64,7 @@
                 }
             }
 
-            vCard += 'END:VCARD\n';
+            vCard += 'END:VCARD';
             return vCard;
         }
 
