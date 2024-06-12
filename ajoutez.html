@@ -4,12 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Télécharger Contact vCard</title>
+    <style>
+        .dive{
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <button id="download">Télécharger vCard</button>
+    <div class="dive">
+        <input type="text" id="cardInfo" value="AKOÏ;Franck Michaël">
+        <input type="text" id="name" value="Franck Michaël AKOÏ">
+        <input type="text" id="org" value="System Electrique">
+        <input type="text" id="title" value="">
+        <input type="text" id="tel1" value="+225 07 68 242 541">
+        <input type="text" id="tel2" value="+225 01 72 038 891">
+        <input type="text" id="address" value="ABIDJAN Rue i86">
+        <input type="email" id="email" value="systemelectrique225@mail.com">
+        <input type="file" id="file">
+        <img id="preview" style="display:none;">
+    </div>
+        <button id="download">Télécharger vCard</button>
 
     <script>
         'use strict';
+
+        const cardInfoEl = document.getElementById('cardInfo');
+        const nameEl = document.getElementById('name');
+        const orgEl = document.getElementById('org');
+        const titleEl = document.getElementById('title');
+        const telEl1 = document.getElementById('tel1');
+        const telEl2 = document.getElementById('tel2');
+        const addressEl = document.getElementById('address');
+        const emailEl = document.getElementById('email');
         const fileEl = document.getElementById('file');
         const previewEl = document.getElementById('preview');
         const downloadEl = document.getElementById('download');
@@ -53,13 +79,14 @@
             let vcard = `BEGIN:VCARD
 ${makeVCardVersion()}
 ${makeVCardInfo(cardInfoEl.value)}
-${makeVCardName("Franck Michaël AKOÏ")}
-${makeVCardOrg("System Electrique")}
+${makeVCardName(nameEl.value)}
+${makeVCardOrg(orgEl.value)}
+${makeVCardTitle(titleEl.value)}
 ${makeVCardPhoto(previewEl.src)}
-${makeVCardTel('+225 07 68 242 541', 'CELL;type=pref')}
-${makeVCardTel('+225 01 72 038 891', 'WORK')}
-${makeVCardAdr("ABIDJAN Rue i86")}
-${makeVCardEmail("systemelectrique225@mail.com")}
+${makeVCardTel(telEl1.value, 'CELL;type=pref')}
+${makeVCardTel(telEl2.value, 'WORK')}
+${makeVCardAdr(addressEl.value)}
+${makeVCardEmail(emailEl.value)}
 ${makeVCardUrl("https://systemeelectrique.netlify.app/")}
 ${makeVCardLabel("My Website")}
 ${makeVCardTimeStamp()}
