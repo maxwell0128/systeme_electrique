@@ -13,6 +13,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .btn-contact:hover {
@@ -24,7 +25,6 @@
     <h1>Enregistrez mes informations de contact</h1>
     <p>Cliquez sur le bouton ci-dessous pour enregistrer facilement mes informations dans votre répertoire téléphonique.</p>
     <button class="btn-contact" id="btnContact">Enregistrer</button>
-    <a href="/user/services/openapi?cmd=downloadVcf&id=s90app5ijm10" class="btn-contact">add</a>
 
     <script>
         const btnContact = document.getElementById('btnContact');
@@ -42,6 +42,7 @@
                 url: 'www.votresiteweb.com', // URL du site Web
                 linkedin: 'https://www.linkedin.com/in/votre-nom/' // URL du profil LinkedIn
             };
+
             // Convertissez les informations de contact au format vCard
             const vCardString = generateVCard(contactInfo);
 
@@ -78,12 +79,10 @@
             const a = document.createElement('a');
             a.href = url;
             a.download = filename;
+            a.rel = 'noopener'; // Ajout de l'attribut rel pour améliorer l'accessibilité
             a.click();
             URL.revokeObjectURL(url);
         }
     </script>
 </body>
 </html>
-
-
-<iframe src="https://linko.page/s90app5ijm10" style="height:667px;width:375px;border:none;"></iframe>
