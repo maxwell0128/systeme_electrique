@@ -99,7 +99,7 @@
                         <a href="#" class="nav-item nav-link">Acceuil</a>
                         <a href="#apropos" class="nav-item nav-link">A propos</a>
                         <a href="#services" class="nav-item nav-link">Services</a>
-                        <a href="#contact" class="nav-item nav-link">Contact</a>
+                        <a href="#envoisms" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="ms-auto d-none d-lg-block">
                         <button type="button" class="btn btn-primary rounded-pill py-2 px-3" data-bs-toggle="modal"
@@ -147,6 +147,9 @@
                                     <textarea class="form-control" placeholder="vous voulez un devis de quoi" id="messages" style="height: 200px"></textarea>
                                     <label for="messages">Vous voulez un devis de quoi</label>
                                 </div>
+                            </div>
+                            <div class="my-3">
+                                <div id="sms2"></div>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-warning rounded-pill py-3 px-5" onclick="sendemaildevi()" type="submit">Demaner devis</button>
@@ -290,7 +293,8 @@
                                 </span>
                             </div>
                         </div>
-                        <a class="btn btn-warning rounded-pill py-3 px-5" href="">demander un devis </a>
+                        <button type="button" class="btn btn-warning rounded-pill py-3 px-5" data-bs-toggle="modal"
+                        data-bs-target="#devis">demander un devis </button>
                     </div>
                 </div>
             </div>
@@ -479,7 +483,7 @@
                     <p class="mb-4">Depuis plus de 3 ans, système électrique est une entreprise d'électricité de premier plan, offrant des services de haute qualité pour les particuliers, les entreprises et les industries. Notre équipe de professionnels qualifiés s'engage à fournir des solutions électriques sûres, efficaces et durables.
                         Contacter-Nous pour un devis ou pour plus d'information
                     </p>
-                    <form>
+                    <form id="envoisms">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
@@ -504,6 +508,9 @@
                                     <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 200px"></textarea>
                                     <label for="message">Message</label>
                                 </div>
+                            </div>
+                            <div class="my-3">
+                                <div id="sms1"></div>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-warning rounded-pill py-3 px-5" onclick="sendemail()" type="submit">Envoyer Message</button>
@@ -574,7 +581,7 @@
                     <a class="btn btn-link" href="#">Accueil</a>
                     <a class="btn btn-link" href="#apropos">A Propos</a>
                     <a class="btn btn-link" href="#services">Services</a>
-                    <a class="btn btn-link" href="#contact">Contact</a>
+                    <a class="btn btn-link" href="#envoisms">Contact</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-4">Heure de travail</h4>
@@ -626,12 +633,20 @@
             var templateID= "template_l7h9r7l";
 
             emailjs.send(serviceID, templateID, params)
-            .then( res => {
-                alert("email envoyer")
-            }).catch((err) => {
-                alert("email non envoyer")
+            .then((res) => {
+                    showMessage1('Email envoyé avec succès', 'success');
+                })
+                .catch((err) => {
+                    showMessage1('Erreur d\'envoi de l\'email', 'error');
             });
         };
+
+        function showMessage1(message, type) {
+            const messageDiv = document.getElementById('sms1');
+            messageDiv.textContent = message;
+            messageDiv.className = type;
+            messageDiv.style.display = 'block';
+        }
 
         function sendemaildevi() {
             (function () {
@@ -648,12 +663,19 @@
             var templateID= "template_l7h9r7l";
 
             emailjs.send(serviceID, templateID, params)
-            .then( res => {
-                alert("email envoyer")
-            }).catch((err) => {
-                alert("email non envoyer")
+            .then((res) => {
+                    showMessage2('Email envoyé avec succès', 'success');
+                })
+                .catch((err) => {
+                    showMessage2('Erreur d\'envoi de l\'email', 'error');
             });
         };
+        function showMessage2(message, type) {
+            const messageDiv = document.getElementById('sms2');
+            messageDiv.textContent = message;
+            messageDiv.className = type;
+            messageDiv.style.display = 'block';
+        }
 
     </script>
         
@@ -671,4 +693,3 @@
 </body>
 
 </html>
-
